@@ -1,0 +1,11 @@
+/target
+crates/*/target
+**/*.rs.bk
+/.cargo
+/.idea
+/.vscode
+/benches/target
+rust-toolchain.toml
+/data/settings/*
+token.json
+Cargo.lock

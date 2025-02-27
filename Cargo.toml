@@ -1,0 +1,6 @@
+[workspace]
+members = ["crates/avian2d", "crates/avian3d"]
+resolver = "2"
+
+[profile.dev]
+opt-level = 1 # Use slightly better optimization, so examples work
