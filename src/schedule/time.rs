@@ -1,5 +1,7 @@
 //! Clocks used for tracking physics simulation time.
 
+use std::time::Duration;
+
 use crate::prelude::*;
 use bevy::prelude::*;
 
@@ -121,6 +123,8 @@ use bevy::prelude::*;
 #[cfg_attr(feature = "serialize", reflect(Serialize, Deserialize))]
 #[reflect(Debug, PartialEq)]
 pub struct Physics {
+    /// The time step (delta time) used for the next physics step.
+    pub timestep: Option<Duration>,
     paused: bool,
     relative_speed: f64,
 }
@@ -128,6 +132,7 @@ pub struct Physics {
 impl Default for Physics {
     fn default() -> Self {
         Self {
+            timestep: None,
             paused: false,
             relative_speed: 1.0,
         }
