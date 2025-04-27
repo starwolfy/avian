@@ -207,8 +207,16 @@ fn run_physics_schedule(world: &mut World, mut is_first_run: Local<IsFirstRun>) 
 
         // Advance the physics clock by the timestep if not paused.
         if !is_paused {
-            world.resource_mut::<Time<Physics>>().advance_by(timestep);
+            let mut time_physics = world.resource_mut::<Time<Physics>>();
 
+            match time_physics.context().timestep {
+                Some(custom_duration) => {
+                    time_physics.advance_by(custom_duration);
+                }
+                None => {
+                    time_physics.advance_by(timestep);
+                }
+            }
             // Advance the substep clock already so that systems running
             // before the substepping loop have the right delta.
             let SubstepCount(substeps) = *world.resource::<SubstepCount>();
